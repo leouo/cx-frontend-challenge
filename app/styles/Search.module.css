@@ -1,0 +1,27 @@
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.main__container {
+  width: 100%;
+  max-width: 1280px;
+}
+
+.main__row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.main__row--right-alignment {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Mobile and Tablets */
+@media (max-width: 768px) {
+  .main {
+    padding: 0;
+  }
+}
