@@ -8,7 +8,10 @@ import FiltersNav from '@/components/FiltersNav'
 import SearchBar from '@/components/SearchBar'
 import FiltersModal from '@/components/FiltersModal'
 import SortModal from '@/components/SortModal'
-import { useSearch } from '../context/searchContext'
+import { useSearch, defaultContextValue } from '../context/searchContext'
+import APISearchService from '../services/searchService'
+
+const API_SERVICE_URL = 'https://api.mercadolibre.com/sites/MLA/search'
 
 const getFilterData = (filterObj: any) => {
   const [filterData] = Object.entries(filterObj)
@@ -17,47 +20,27 @@ const getFilterData = (filterObj: any) => {
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  let initialContext
+
   const { query, sort, ...filter } = context.query
   const [filterId, filterValue] = getFilterData(filter)
 
   if (query) {
-    const API_URL = `https://api.mercadolibre.com/sites/MLA/search?q=${query}&${filterId}=${filterValue}&sort=${sort}&limit=30`
+    const searchService = new APISearchService(API_SERVICE_URL)
+    const searchResponse = await searchService.search({
+      q: query as string,
+      sort: sort as string,
+      [filterId]: filterValue,
+    })
 
-    const res = await fetch(API_URL)
-
-    const {
-      query: previousQuery,
-      results,
-      available_sorts: availableSorts,
-      sort: defaultSort,
-      available_filters: availableFilters,
-      filters: [selectedFilter],
-    } = await res.json()
-
-    return {
-      props: {
-        initialContext: {
-          previousQuery,
-          results: results,
-          availableSorts: [...availableSorts, defaultSort],
-          defaultSort,
-          availableFilters,
-          selectedFilter,
-        },
-      },
-    }
+    initialContext = searchResponse
+  } else {
+    initialContext = defaultContextValue
   }
 
   return {
     props: {
-      initialContext: {
-        previousQuery: '',
-        results: [],
-        availableSorts: [],
-        defaultSort: {},
-        availableFilters: [],
-        selectedFilter: {},
-      },
+      initialContext,
     }
   }
 }

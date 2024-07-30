@@ -3,7 +3,7 @@ import { ISelectOption } from '@/components/Select'
 import { IProduct } from '@/components/Product'
 import { IFilter } from '@/components/Filter'
 
-interface ISearchContext {
+export interface ISearchContext {
   previousQuery: string;
   results: IProduct[];
   availableFilters: IFilter[];
@@ -16,7 +16,7 @@ interface ISearchProvider {
   initialValue: ISearchContext;
 }
 
-const defaultValue = {
+export const defaultContextValue = {
   previousQuery: '',
   results: [],
   availableFilters: [],
@@ -27,7 +27,7 @@ const defaultValue = {
   },
 }
 
-const SearchContext = createContext<ISearchContext>(defaultValue)
+const SearchContext = createContext<ISearchContext>(defaultContextValue)
 
 export const SearchProvider: FC<ISearchProvider> = ({ children, initialValue }) => {
   const [searchResponse, setSearchResponse] = useState(initialValue)
