@@ -1,13 +1,23 @@
 import Head from 'next/head'
 import styles from '@/styles/BaseLayout.module.css'
 import Results from '@/components/Results'
+import FiltersNav from '@/components/FiltersNav'
 import { useSearch } from '../context/searchContext'
 
+const getFilterData = filterObj => {
+  const [filterData] = Object.entries(filterObj)
+
+  return filterData || []
+}
+
 export const getServerSideProps = async context => {
-  const { query } = context.query
+  const { query, sort, ...filter } = context.query
+  const [filterId, filterValue] = getFilterData(filter)
 
   if (query) {
-    const res = await fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${query}&sort=%7BSORT_ID%7D&price=3000.0-9500.0&limit=30`)
+    const API_URL = `https://api.mercadolibre.com/sites/MLA/search?q=${query}&${filterId}=${filterValue}&sort=${sort}&limit=30`
+
+    const res = await fetch(API_URL)
     
     const {
       results,
@@ -34,7 +44,7 @@ export const getServerSideProps = async context => {
 }
 
 export default function Search() {
-  const { results } = useSearch()
+  const { results, availableFilters } = useSearch()
 
   return (
     <>
@@ -47,6 +57,7 @@ export default function Search() {
           <div className={styles.main__container}>
             <div className={styles['main__row--right-alignment']}>Sort Select</div>
             <div className={styles.main__row}>
+              <FiltersNav availableFilters={availableFilters} />
               <Results results={results} />
             </div>
           </div>
