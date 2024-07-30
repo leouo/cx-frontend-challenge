@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/BaseLayout.module.css'
 import Results from '@/components/Results'
+import SortSelect from '@/components/SortSelect'
 import FiltersNav from '@/components/FiltersNav'
 import { useSearch } from '../context/searchContext'
 
@@ -20,31 +21,44 @@ export const getServerSideProps = async context => {
     const res = await fetch(API_URL)
     
     const {
+      query: previousQuery,
       results,
-      available_sorts,
-      available_filters,
+      available_sorts: availableSorts,
+      sort: defaultSort,
+      available_filters: availableFilters,
+      filters: [selectedFilter],
     } = await res.json()
 
     return {
       props: {
-        results: results,
-        availableSorts: available_sorts,
-        availableFilters: available_filters,
+        initialContext: {
+          previousQuery,
+          results: results,
+          availableSorts: [...availableSorts, defaultSort],
+          defaultSort,
+          availableFilters,
+          selectedFilter,
+        },
       },
     }
   }
 
   return {
     props: {
-      results: [],
-      availableSorts: [],
-      availableFilters: [],
-    },
+      initialContext: {
+        previousQuery: '',
+        results: [],
+        availableSorts: [],
+        defaultSort: {},
+        availableFilters: [],
+        selectedFilter: {},
+      },
+    }
   }
 }
 
 export default function Search() {
-  const { results, availableFilters } = useSearch()
+  const { results, availableFilters, availableSorts, defaultSort } = useSearch()
 
   return (
     <>
@@ -55,7 +69,12 @@ export default function Search() {
       </Head>
       <main className={styles.main}>
           <div className={styles.main__container}>
-            <div className={styles['main__row--right-alignment']}>Sort Select</div>
+            <div className={styles['main__row--right-alignment']}>
+              <SortSelect
+                availableSorts={availableSorts}
+                defaultSort={defaultSort}
+              />
+            </div>
             <div className={styles.main__row}>
               <FiltersNav availableFilters={availableFilters} />
               <Results results={results} />

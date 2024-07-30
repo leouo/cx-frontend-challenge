@@ -1,10 +1,10 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import { useSearch } from '../../context/searchContext'
 import { IoSearchOutline } from 'react-icons/io5'
 import styles from '@/styles/Header.module.css'
 
 const Header = () => {
-  const { query: { query } } = useRouter()
+  const { previousQuery } = useSearch()
 
   return (
     <header className={styles.header}>
@@ -20,7 +20,7 @@ const Header = () => {
             type="search"
             role="search"
             placeholder="Buscar productos, marcas y más…"
-            defaultValue={query}
+            defaultValue={previousQuery}
             className={styles.searchBar__input}
           />
           <button className={styles.searchBar__button} type="submit">

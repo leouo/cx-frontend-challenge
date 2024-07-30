@@ -1,0 +1,16 @@
+.sortSelect {
+  margin: 8px;
+}
+
+.sortLabel {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Mobile and Tablets */
+@media (max-width: 768px) {
+  .sortSelect {
+    display: none;
+  }
+}
