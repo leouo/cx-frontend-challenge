@@ -1,0 +1,13 @@
+.searchHint {
+  font-size: 45px;
+  color: #aaaaaa;
+  margin: 75px 0;
+}
+
+/* Mobile and Tablets */
+@media (max-width: 768px) {
+  .searchHint {
+    font-size: 20px;
+    margin: 50px 0;
+  }
+}
