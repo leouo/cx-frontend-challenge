@@ -32,8 +32,13 @@ export const Select: FC<ISelect> = ({ id, options, onChange, defaultOption }) =>
   }
 
   return (
-    <div className={styles.select__container}>
-      <button id={id} className={styles.select__button}>
+    <div className={styles.select__container} role="listbox">
+      <button
+        id={id}
+        className={styles.select__button}
+        aria-haspopup="listbox"
+        aria-labelledby="selected-value"
+      >
         {getOptionName(options, selectedOption)}
         <i>
           <IoChevronDown className={styles.select__icon} stroke="#3483FA" size={16} />

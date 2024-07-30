@@ -22,6 +22,8 @@
 .product__price {
   font-size: 24px;
   font-weight: 400;
+  display: flex;
+  align-items: center;
 }
 
 .product__title {
@@ -41,6 +43,14 @@
   width: 150px;
   height: 150px;
   margin-right: 20px;
+}
+
+.product__shippingIcon {
+  background-color: #20D761;
+  padding: 5px;
+  border-radius: 15px;
+  display: inline-flex;
+  margin-left: 10px;
 }
 
 /* Mobile and Tablets */
