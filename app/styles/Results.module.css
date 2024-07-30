@@ -6,6 +6,7 @@
   max-width: 1020px;
   border-radius: 5px;
   padding: 0 20px;
+  margin-right: 15px;
 }
 
 .product {
@@ -40,6 +41,13 @@
   width: 150px;
   height: 150px;
   margin-right: 20px;
+}
+
+/* Mobile and Tablets */
+@media (max-width: 768px) {
+  .results {
+    margin-right: 0;
+  }
 }
 
 /* Mobile */

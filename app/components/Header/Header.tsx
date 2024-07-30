@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useSearch } from '../../context/searchContext'
 import { IoSearchOutline } from 'react-icons/io5'
 import styles from '@/styles/Header.module.css'
@@ -10,9 +11,9 @@ const Header = () => {
     <header className={styles.header}>
       <nav className={styles.navBar}>
         <div className={styles.navBar__logo}>
-          <a href="/">
+          <Link href="/">
             <Image src="/logo.png" alt="Logotipo de Mercado Libre" fill priority />
-          </a>
+          </Link>
         </div>
         <form action="/search" className={styles.searchBar}>
           <input

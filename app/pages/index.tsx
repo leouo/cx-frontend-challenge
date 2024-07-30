@@ -7,7 +7,7 @@ export default function Search() {
     <>
       <Head>
         <title>Home</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <main className={baseLayout.main}>
