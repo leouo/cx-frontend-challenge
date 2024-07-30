@@ -1,0 +1,34 @@
+.searchBar {
+  background-color: #fff;
+  width: 100%;
+  border-bottom: #e9e9e9 1px solid;
+  padding: 5px 0;
+}
+
+.searchBar__actions {
+  display: flex;
+}
+
+.searchBar__action {
+  flex: auto;
+  list-style: none;
+}
+
+.searchBar__button {
+  background-color: #fff;
+  width: 100%;
+  padding: 16px 0;
+  color: #3483FA;
+  border-right: #e9e9e9 1px solid;
+}
+
+.searchBar__action:last-child .searchBar__button {
+  border-right: 0;
+}
+
+/* Mobile and Tablets */
+@media (min-width: 769px) {
+  .searchBar {
+    display: none;
+  }
+}

@@ -1,9 +1,13 @@
+import { useState } from 'react'
 import { GetServerSidePropsContext } from 'next'
 import Head from 'next/head'
 import styles from '@/styles/BaseLayout.module.css'
 import Results from '@/components/Results'
 import SortSelect from '@/components/SortSelect'
 import FiltersNav from '@/components/FiltersNav'
+import SearchBar from '@/components/SearchBar'
+import FiltersModal from '@/components/FiltersModal'
+import SortModal from '@/components/SortModal'
 import { useSearch } from '../context/searchContext'
 
 const getFilterData = (filterObj: any) => {
@@ -59,7 +63,23 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 }
 
 export default function Search() {
+  const [isSortModalOpen, setIsSortModalOpen] = useState(false)
+  const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
   const { results, availableFilters, availableSorts, defaultSort } = useSearch()
+
+  const actions = [
+    {
+      label: 'Ordenar',
+      handler: () => setIsSortModalOpen(true),
+    },
+    {
+      label: 'Filtrar',
+      handler: () => setIsFiltersModalOpen(true),
+    }
+  ]
+
+  const handleFiltersModalClose = () => setIsFiltersModalOpen(false)
+  const handleSortModalClose = () => setIsSortModalOpen(false)
 
   return (
     <>
@@ -69,6 +89,20 @@ export default function Search() {
         <link rel="icon" href="/favicon.svg" />
       </Head>
       <div className={styles.main__container}>
+        <div className={styles.main__row}>
+          <SearchBar actions={actions} />
+          <FiltersModal
+            isFiltersModalOpen={isFiltersModalOpen}
+            onFiltersModalClose={handleFiltersModalClose}
+            availableFilters={availableFilters}
+          />
+          <SortModal
+            isSortModalOpen={isSortModalOpen}
+            onSortModalClose={handleSortModalClose}
+            availableSorts={availableSorts}
+            defaultSort={defaultSort}
+          />
+        </div>
         <div className={styles['main__row--right-alignment']}>
           <SortSelect
             availableSorts={availableSorts}
