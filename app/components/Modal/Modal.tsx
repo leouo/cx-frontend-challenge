@@ -20,7 +20,7 @@ const Modal: FC<IModal> = ({ isOpen, onClose, title, children }) => {
         <h3 className={styles.modal__title}>{title}</h3>
         <button
           onClick={onClose}
-          aria-label="Close modal"
+          aria-label="Cerrar modal"
           className={styles.modal__button}
         >
           <i>

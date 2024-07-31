@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import Link from 'next/link'
-import { useSearch } from '../../context/searchContext'
+import { useSelector } from 'react-redux'
 import styles from '@/styles/Filters.module.css'
+import { RootState } from '@/store/store'
 
 type filterId = {
   filterId: string;
@@ -16,7 +17,7 @@ export interface IFilterOption {
 type FilterOption = IFilterOption & filterId
 
 export const FilterOption: FC<FilterOption> = ({ id, name, results, filterId }) => {
-  const { previousQuery } = useSearch()
+  const { previousQuery } = useSelector((state: RootState) => state.global)
 
   return (
     <li className={styles.filter__option}>

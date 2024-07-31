@@ -1,17 +1,18 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Roboto } from '@next/font/google'
+import { Provider } from 'react-redux'
 import BaseLayout from '@/components/BaseLayout'
-import { SearchProvider } from '../context/searchContext'
+import store from '@/store/store'
 
 const roboto = Roboto({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
 })
 
-export default function App({ Component, pageProps: { initialContext, ...pageProps } }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <SearchProvider initialValue={{ ...initialContext }}>
+    <Provider store={store}>
       <BaseLayout>
         <style jsx global>
           {`
@@ -22,6 +23,6 @@ export default function App({ Component, pageProps: { initialContext, ...pagePro
         </style>
         <Component {...pageProps} />
       </BaseLayout>
-    </SearchProvider>
+    </Provider>
   )
 }

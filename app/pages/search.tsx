@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { GetServerSidePropsContext } from 'next'
+import { useState, useEffect } from 'react'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import { useDispatch, useSelector } from 'react-redux'
 import Head from 'next/head'
 import styles from '@/styles/BaseLayout.module.css'
 import Results from '@/components/Results'
@@ -8,8 +9,9 @@ import FiltersNav from '@/components/FiltersNav'
 import SearchBar from '@/components/SearchBar'
 import FiltersModal from '@/components/FiltersModal'
 import SortModal from '@/components/SortModal'
-import { useSearch, defaultContextValue } from '../context/searchContext'
 import APISearchService from '../services/searchService'
+import { RootState } from '@/store/store'
+import { setState, initialState as storeInitialState } from '@/store/slice'
 
 const API_SERVICE_URL = 'https://api.mercadolibre.com/sites/MLA/search'
 
@@ -20,7 +22,7 @@ const getFilterData = (filterObj: any) => {
 }
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  let initialContext
+  let initialState
 
   const { query, sort, ...filter } = context.query
   const [filterId, filterValue] = getFilterData(filter)
@@ -33,22 +35,31 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
       [filterId]: filterValue,
     })
 
-    initialContext = searchResponse
+    initialState = searchResponse
   } else {
-    initialContext = defaultContextValue
+    initialState = storeInitialState
   }
 
   return {
     props: {
-      initialContext,
+      initialState,
     }
   }
 }
 
-export default function Search() {
+interface ISearch {
+  initialState: RootState;
+}
+
+export default function Search ({ initialState } : ISearch) {
+  const dispatch = useDispatch()
   const [isSortModalOpen, setIsSortModalOpen] = useState(false)
   const [isFiltersModalOpen, setIsFiltersModalOpen] = useState(false)
-  const { results, availableFilters, availableSorts, defaultSort } = useSearch()
+  const { results, availableFilters, availableSorts, defaultSort } = useSelector((state: RootState) => state.global)
+
+  useEffect(() => {
+    dispatch(setState(initialState));
+  }, [dispatch, initialState])
 
   const actions = [
     {

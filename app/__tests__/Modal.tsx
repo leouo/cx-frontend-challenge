@@ -30,7 +30,7 @@ describe('Modal', () => {
     fireEvent.click(openModalButton)
 
     const modalHeader = screen.getByRole('heading', { name: 'Modal Test', level: 3 })
-    const closeModalButton = screen.getByRole('button', { name: 'Close modal' })
+    const closeModalButton = screen.getByRole('button', { name: 'Cerrar modal' })
     const modalContent = screen.getByText('Modal Content')
 
     expect(modalHeader).toBeInTheDocument()
@@ -51,7 +51,7 @@ describe('Modal', () => {
     const modalContent = screen.getByText('Modal Content')
     expect(modalContent).toBeInTheDocument()
 
-    const closeModalButton = screen.getByRole('button', { name: 'Close modal' })
+    const closeModalButton = screen.getByRole('button', { name: 'Cerrar modal' })
     fireEvent.click(closeModalButton)
 
     expect(modalContent).not.toBeInTheDocument()

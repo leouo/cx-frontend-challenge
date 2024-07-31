@@ -46,7 +46,7 @@ const FilterRange = () => {
       <button
         type="submit"
         name="range_submit"
-        aria-label="Submeter filtro"
+        aria-label="Enviar filtro"
         className={styles.filter__button}
       >
         <i>

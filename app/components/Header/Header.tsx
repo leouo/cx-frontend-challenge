@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSearch } from '../../context/searchContext'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
 import { IoSearchOutline } from 'react-icons/io5'
 import styles from '@/styles/Header.module.css'
 
 const Header = () => {
-  const { previousQuery } = useSearch()
+  const { previousQuery } = useSelector((state: RootState) => state.global)
 
   return (
     <header className={styles.header}>

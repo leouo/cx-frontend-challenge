@@ -10,7 +10,7 @@ interface ISortSelect {
 
 const SortSelect: FC<ISortSelect> = ({ availableSorts, defaultSort }) => {
   const { query, push, pathname } = useRouter()
-
+  console.log(defaultSort)
   const handleSelectChange = (selectedOption: string) => {
     push({
       pathname,

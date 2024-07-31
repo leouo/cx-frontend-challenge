@@ -3,7 +3,8 @@ import Link from 'next/link'
 import Modal from '@/components/Modal'
 import { IFilter } from '@/components/Filter'
 import { IoChevronDown } from 'react-icons/io5'
-import { useSearch } from '../../context/searchContext'
+import { useSelector } from 'react-redux'
+import { RootState } from '@/store/store'
 import styles from '@/styles/FiltersModal.module.css'
 
 interface IFiltersModal {
@@ -13,7 +14,7 @@ interface IFiltersModal {
 }
 
 const FiltersModal: FC<IFiltersModal> = ({ isFiltersModalOpen, onFiltersModalClose, availableFilters }) => {
-  const { previousQuery } = useSearch()
+  const { previousQuery } = useSelector((state: RootState) => state.global)
 
   return (
     <Modal

@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { IoChevronDown } from 'react-icons/io5'
 import { SelectOption } from '@/components/SelectOption'
 import styles from '@/styles/Select.module.css'
@@ -23,6 +23,10 @@ const getOptionName = (options: ISelectOption[], optionValue: string) => {
 
 export const Select: FC<ISelect> = ({ id, options, onChange, defaultOption }) => {
   const [selectedOption, setSelectedOption] = useState(defaultOption)
+
+  useEffect(() => {
+    setSelectedOption(defaultOption)
+  }, [defaultOption])
 
   const handleOptionChange = (event: React.KeyboardEvent | React.MouseEvent, value: string) => {
     if ((event as React.KeyboardEvent).key === 'Enter' || event?.type === 'click') {

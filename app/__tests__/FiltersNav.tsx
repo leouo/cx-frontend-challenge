@@ -1,10 +1,24 @@
 import { render, screen } from '@testing-library/react'
+import { Provider } from 'react-redux'
 import FiltersNav from '@/components/FiltersNav'
 import { textFilter, rangeFilter } from '../fixtures/search-filters'
+import store from '@/store/store'
+
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    query: '',
+    push: jest.fn(),
+    pathname: '',
+  })
+}))
 
 describe('FiltersNav', () => {
   it('renders correctly', () => {
-    render(<FiltersNav availableFilters={[textFilter]} />)
+    render(
+      <Provider store={store}>
+        <FiltersNav availableFilters={[textFilter]} />
+      </Provider>
+    )
 
     const allOptions = screen.getAllByRole('listitem')
 
@@ -23,7 +37,11 @@ describe('FiltersNav', () => {
   })
 
   it('renders text filter', () => {
-    render(<FiltersNav availableFilters={[textFilter]} />)
+    render(
+      <Provider store={store}>
+        <FiltersNav availableFilters={[textFilter]} />
+      </Provider>
+    )
 
     const allOptions = screen.getAllByRole('listitem')
 
@@ -31,11 +49,15 @@ describe('FiltersNav', () => {
   })
 
   it('renders range filter', () => {
-    render(<FiltersNav availableFilters={[rangeFilter]} />)
+    render(
+      <Provider store={store}>
+        <FiltersNav availableFilters={[rangeFilter]} />
+      </Provider>
+    )
 
     const minField = screen.getByPlaceholderText('Mínimo')
     const maxField = screen.getByPlaceholderText('Máximo')
-    const submitButton = screen.getByRole('button', { name: 'Submeter filtro' })
+    const submitButton = screen.getByRole('button', { name: 'Enviar filtro' })
 
     expect(minField).toBeInTheDocument()
     expect(maxField).toBeInTheDocument()
