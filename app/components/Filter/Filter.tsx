@@ -10,8 +10,6 @@ export interface IFilter {
   values: IFilterOption[];
 }
 
-const handleRangeSubmit = () => null
-
 export const Filter: FC<IFilter> = ({ id, name, type, values: options }) => {
   return (
     <section className={styles.filter}>
@@ -27,7 +25,7 @@ export const Filter: FC<IFilter> = ({ id, name, type, values: options }) => {
           />
         ))}
       </ul>
-      {type === 'range' ? <FilterRange onRangeSubmit={handleRangeSubmit} /> : null}
+      {type === 'range' ? <FilterRange /> : null}
     </section>
   )
 }

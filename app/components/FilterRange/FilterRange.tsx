@@ -1,23 +1,53 @@
-import { FC } from 'react'
+import { useRouter } from 'next/router'
 import { IoChevronForwardCircleSharp } from 'react-icons/io5'
 import styles from '@/styles/Filters.module.css'
 
-interface IFilterRange {
-  onRangeSubmit: () => null
-}
+const FilterRange = () => {
+  const { query, push, pathname } = useRouter()
+  
+  const handleRangeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
 
-const FilterRange: FC<IFilterRange> = ({ onRangeSubmit }) => {
+    const form = event.target
+    const [min, max] = new FormData(form as HTMLFormElement).values()
+
+    const rangeValue = `${min}-${max}`
+
+    push({
+      pathname,
+      query: {
+        ...query,
+        price: rangeValue,
+      },
+    })
+  }
+
   return (
-    <form className={styles.filter__range}>
-      <input type="text" name="range_min" placeholder="Mínimo" className={styles.filter__input} />
+    <form className={styles.filter__range} onSubmit={handleRangeSubmit}>
+      <input
+        type="text"
+        name="min"
+        placeholder="Mínimo"
+        required
+        pattern="^[0-9]+([,.][0-9]+)?$"
+        title="Ingrese un valor válido, por ejemplo, 1234.5 o 1234.56"
+        className={styles.filter__input}
+      />
       <span className={styles.filter__inputSeparator}>_</span>
-      <input type="text" name="range_max" placeholder="Máximo" className={styles.filter__input} />
+      <input
+        type="text"
+        name="max"
+        placeholder="Máximo"
+        required
+        pattern="^[0-9]+([,.][0-9]+)?$"
+        title="Ingrese un valor válido, por ejemplo, 1234.5 o 1234.56"
+        className={styles.filter__input}
+      />
       <button
         type="submit"
         name="range_submit"
         aria-label="Submeter filtro"
         className={styles.filter__button}
-        onClick={onRangeSubmit}
       >
         <i>
           <IoChevronForwardCircleSharp size={25} fill="#E0E0E0" />
