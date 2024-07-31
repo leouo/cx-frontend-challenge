@@ -40,8 +40,8 @@ export const Select: FC<ISelect> = ({ id, options, onChange, defaultOption }) =>
       <button
         id={id}
         className={styles.select__button}
-        aria-haspopup="listbox"
-        aria-labelledby="selected-value"
+        role="listbox"
+        aria-label={`Ordenação aplicada ${getOptionName(options, selectedOption)}`}
       >
         {getOptionName(options, selectedOption)}
         <i>

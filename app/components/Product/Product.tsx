@@ -22,9 +22,9 @@ const formatPrice = (price: number) => price.toLocaleString('es-AR', {
 })
 
 const FreeShippingIcon = () => (
-  <span className={styles.product__shippingIcon} aria-label="envío gratis">
+  <div className={styles.product__shippingIcon} aria-label="envío gratis">
     <HiOutlineTruck fill="#20D761" stroke="#333" size={10} />
-  </span>
+  </div>
 )
 
 export const Product: FC<IProduct> = ({ title, thumbnail, installments, price, shipping }) => {

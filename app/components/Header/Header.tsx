@@ -16,16 +16,21 @@ const Header = () => {
             <Image src="/logo.png" alt="Logotipo de Mercado Libre" fill priority />
           </Link>
         </div>
-        <form action="/search" className={styles.searchBar}>
+        <form action="/search" role="search" className={styles.searchBar}>
           <input
             name="query"
             type="search"
-            role="search"
             placeholder="Buscar productos, marcas y más…"
+            aria-label="Buscar productos, marcas y más…"
             defaultValue={previousQuery}
             className={styles.searchBar__input}
           />
-          <button className={styles.searchBar__button} type="submit">
+          <button
+            className={styles.searchBar__button}
+            aria-label="Buscar"
+            role="button"
+            type="submit"
+          >
             <i>
               <IoSearchOutline size={20} />
             </i>

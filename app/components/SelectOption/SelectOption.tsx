@@ -22,6 +22,7 @@ export const SelectOption: FC<ISelectOptionComponent> = ({ children, value, isSe
       className={classes}
       onClick={event => onOptionChange(event, value)}
       onKeyDown={event => onOptionChange(event, value)}
+      aria-selected={isSelected}
     >
       {children}
     </li>

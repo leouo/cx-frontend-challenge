@@ -10,7 +10,7 @@ interface ISortSelect {
 
 const SortSelect: FC<ISortSelect> = ({ availableSorts, defaultSort }) => {
   const { query, push, pathname } = useRouter()
-  console.log(defaultSort)
+
   const handleSelectChange = (selectedOption: string) => {
     push({
       pathname,
@@ -23,7 +23,13 @@ const SortSelect: FC<ISortSelect> = ({ availableSorts, defaultSort }) => {
 
   return (
     <div className={styles.sortSelect}>
-      <label className={styles.sortLabel} htmlFor="sort-select">Ordenar por</label>
+      <label
+        className={styles.sortLabel}
+        htmlFor="sort-select"
+        aria-label="Ordenar por"
+      >
+        Ordenar por
+      </label>
       <Select
         id="sort-select"
         options={availableSorts}
