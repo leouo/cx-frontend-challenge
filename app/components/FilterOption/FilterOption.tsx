@@ -21,7 +21,11 @@ export const FilterOption: FC<FilterOption> = ({ id, name, results, filterId }) 
 
   return (
     <li className={styles.filter__option}>
-      <Link href={`\search?query=${previousQuery}&${filterId}=${id}`} className={styles.filter__link}>
+      <Link
+        href={`\search?query=${previousQuery}&${filterId}=${id}`}
+        className={styles.filter__link}
+        data-cy="filter-option"
+      >
         <span className={styles.filter__optionName}>{name}</span>
         <span className={styles.filter__resultsCount}>({results})</span>
       </Link>

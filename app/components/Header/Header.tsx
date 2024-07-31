@@ -12,7 +12,7 @@ const Header = () => {
     <header className={styles.header}>
       <nav className={styles.navBar}>
         <div className={styles.navBar__logo}>
-          <Link href="/">
+          <Link href="/" title="Volver a la página de inicio">
             <Image src="/logo.png" alt="Logotipo de Mercado Libre" fill priority />
           </Link>
         </div>
@@ -27,6 +27,7 @@ const Header = () => {
           />
           <button
             className={styles.searchBar__button}
+            name="search"
             aria-label="Buscar"
             role="button"
             type="submit"

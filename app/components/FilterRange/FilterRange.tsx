@@ -1,8 +1,13 @@
+import { FC } from 'react'
 import { useRouter } from 'next/router'
 import { IoChevronForwardCircleSharp } from 'react-icons/io5'
 import styles from '@/styles/Filters.module.css'
 
-const FilterRange = () => {
+interface IFilterRange {
+  filterId: string;
+}
+
+const FilterRange: FC<IFilterRange> = ({ filterId }) => {
   const { query, push, pathname } = useRouter()
   
   const handleRangeSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,7 +28,7 @@ const FilterRange = () => {
   }
 
   return (
-    <form className={styles.filter__range} onSubmit={handleRangeSubmit}>
+    <form className={styles.filter__range} onSubmit={handleRangeSubmit} name={filterId}>
       <input
         type="text"
         name="min"

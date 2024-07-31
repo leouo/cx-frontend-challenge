@@ -25,7 +25,7 @@ export const Filter: FC<IFilter> = ({ id, name, type, values: options }) => {
           />
         ))}
       </ul>
-      {type === 'range' ? <FilterRange /> : null}
+      {type === 'range' ? <FilterRange filterId={id} /> : null}
     </section>
   )
 }

@@ -29,7 +29,7 @@ const FreeShippingIcon = () => (
 
 export const Product: FC<IProduct> = ({ title, thumbnail, installments, price, shipping }) => {
   return (
-    <article className={styles.product}>
+    <article className={styles.product} data-cy="product">
       <figure>
         <img className={styles.product__thumbnail} src={thumbnail} alt={title} />
       </figure>
