@@ -36,7 +36,7 @@ export const Select: FC<ISelect> = ({ id, options, onChange, defaultOption }) =>
   }
 
   return (
-    <div className={styles.select__container} role="listbox">
+    <div className={styles.select__container}>
       <button
         id={id}
         className={styles.select__button}

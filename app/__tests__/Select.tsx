@@ -48,7 +48,7 @@ describe('Select', () => {
       />
     )
 
-    const defaultValue = screen.getByRole('button', { name: 'Option 01' })
+    const defaultValue = screen.getByRole('listbox', { name: 'Ordenação aplicada Option 01' })
     expect(defaultValue).toBeInTheDocument()
   })
 
@@ -64,14 +64,14 @@ describe('Select', () => {
       />
     )
 
-    expect(screen.getByRole('button', { name: 'Option 01' })).toBeInTheDocument()
+    expect(screen.getByRole('listbox', { name: 'Ordenação aplicada Option 01' })).toBeInTheDocument()
 
-    const selectButton = screen.getByRole('button', { name: 'Option 01' })
+    const selectButton = screen.getByRole('listbox', { name: 'Ordenação aplicada Option 01' })
     fireEvent.click(selectButton)
 
     const optionTwo = screen.getByRole('option', { name: 'Option 02' })
     fireEvent.click(optionTwo)
 
-    expect(screen.getByRole('button', { name: 'Option 02' })).toBeInTheDocument()
+    expect(screen.getByRole('listbox', { name: 'Ordenação aplicada Option 02' })).toBeInTheDocument()
   })
 })
